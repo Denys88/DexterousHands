@@ -23,7 +23,7 @@ class ShadowHandOver(BaseTask):
         self.sim_params = sim_params
         self.physics_engine = physics_engine
         self.agent_index = agent_index
-
+        print('ShadowHandOver: ', is_multi_agent)
         self.is_multi_agent = is_multi_agent
 
         self.randomize = self.cfg["task"]["randomize"]

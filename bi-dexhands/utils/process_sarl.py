@@ -1,6 +1,30 @@
 
 
 
+def process_rlgppo(args, env, cfg_train, logdir):
+    from utils.rlgames_utils import RLGWrapper
+    from rl_games.torch_runner import Runner
+    env = RLGWrapper(env)
+    config = cfg_train
+
+    config['params']['config']['vec_env'] = env
+    config['params']['config']['env_info'] = env.get_env_info()
+    config['params']['config']['num_actors'] = args.num_envs
+    config['params']['config']['name'] = args.experiment
+    runner = Runner()
+    runner.load(config)
+
+    if args.test:
+        runner.run({
+            'train': False,
+            'play': True,
+            'checkpoint' : args.checkpoint
+        })
+    else:
+        runner.run({
+            'train': True,
+        })
+
 def process_ppo(args, env, cfg_train, logdir):
     from algorithms.rl.ppo import PPO, ActorCritic
     learn_cfg = cfg_train["learn"]

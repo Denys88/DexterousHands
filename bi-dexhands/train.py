@@ -18,7 +18,7 @@ def train():
     print("Algorithm: ", args.algo)
     agent_index = get_AgentIndex(cfg)
 
-    if args.algo in ["mappo", "happo", "hatrpo","maddpg","ippo"]: 
+    if args.algo in ["mappo", "happo", "hatrpo","maddpg","ippo", "marlgppo"]: 
         # maddpg exists a bug now 
         args.task_type = "MultiAgent"
 
@@ -32,7 +32,7 @@ def train():
         else:
             runner.run()
 
-    elif args.algo in ["ppo","ddpg","sac","td3","trpo"]:
+    elif args.algo in ["ppo","ddpg","sac","td3","trpo", "rlgppo"]:
         task, env = parse_task(args, cfg, cfg_train, sim_params, agent_index)
 
         sarl = eval('process_{}'.format(args.algo))(args, env, cfg_train, logdir)

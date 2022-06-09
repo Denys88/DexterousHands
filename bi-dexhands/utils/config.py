@@ -268,7 +268,7 @@ def parse_sim_params(args, cfg, cfg_train):
     return sim_params
 
 
-def get_args(benchmark=False, use_rlg_config=False):
+def get_args(benchmark=False, use_rlg_config=True):
     custom_parameters = [
         {"name": "--test", "action": "store_true", "default": False,
             "help": "Run trained policy, no training"},
@@ -363,7 +363,7 @@ def get_args(benchmark=False, use_rlg_config=False):
     if args.cfg_env == "Base":
         args.cfg_env = cfg_env
 
-    if args.algo not in ["maddpg", "happo", "mappo", "hatrpo","ippo","ppo","sac","td3","ddpg","trpo"]:
+    if args.algo not in ["maddpg", "happo", "mappo", "hatrpo","ippo","ppo","sac","td3","ddpg","trpo", "rlgppo", "marlgppo"]:
         warn_algorithm_name()
 
     return args
